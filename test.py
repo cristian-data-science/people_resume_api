@@ -1,9 +1,13 @@
 import requests
 import json
+import os
+from dotenv import find_dotenv, load_dotenv
+
+
+load_dotenv(find_dotenv())
 
 url = 'http://127.0.0.1:10000'
-#url = 'https://mail-gpt-automation.onrender.com/'
-  # Cambia esto a la URL de tu API si no es esta
+
 data = {
 
     "content": """
@@ -20,7 +24,7 @@ CIISA Diplomado, Ciberseguridad Aplicada  · (mayo de 2019 - febrero de 2020) Du
 }
 headers = {'Content-Type': 'application/json'}
 
-response = requests.post(url, data=json.dumps(data), headers=headers, auth=('make_ia_auto', '3%6%7dJFDS511'))
+response = requests.post(url, data=json.dumps(data), headers=headers, auth=(os.getenv('user_api'), os.getenv('pass_api')))
 
 print(response.status_code)  # Debería imprimir 200 si todo salió bien
 print(response.json())  # Imprime la respuesta de la API
